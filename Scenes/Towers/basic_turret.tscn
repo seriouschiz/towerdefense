@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://c8bgp7afjcgsm"]
+
+[ext_resource type="PackedScene" uid="uid://cueq4spghr5e7" path="res://Scenes/Towers/tower_template.tscn" id="1_38117"]
+[ext_resource type="Script" uid="uid://celcsfchxr11l" path="res://Scenes/Towers/basic_turret.gd" id="2_xeyq8"]
+[ext_resource type="Texture2D" uid="uid://c4dqt7fi2wbe5" path="res://Resources/Images/Towers/BasicTurret/BasicTurret_Icon.png" id="3_v3s01"]
+[ext_resource type="PackedScene" uid="uid://qlnpkq0xay6s" path="res://Scenes/Projectiles/bullet.tscn" id="4_jh4im"]
+[ext_resource type="Texture2D" uid="uid://by3fuffjtbsye" path="res://Resources/Images/Towers/BasicTurret/BasicTurret_Base.png" id="5_l1ygg"]
+[ext_resource type="Texture2D" uid="uid://w1xsu5jvf7o8" path="res://Resources/Images/Towers/BasicTurret/BasicTurret_Top.png" id="6_yh8nn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fpuw7"]
+radius = 34.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mno1c"]
+
+[node name="BasicTurret" instance=ExtResource("1_38117")]
+script = ExtResource("2_xeyq8")
+type = "Basic Turret"
+cost = 100
+icon = ExtResource("3_v3s01")
+projectile_type = ExtResource("4_jh4im")
+damage = 8
+attack_cd = 1.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_fpuw7")
+
+[node name="CollisionShape2D" parent="AttackRange" index="0"]
+shape = SubResource("CircleShape2D_mno1c")
+
+[node name="Base" parent="." index="2"]
+texture = ExtResource("5_l1ygg")
+
+[node name="Top" parent="." index="3"]
+texture = ExtResource("6_yh8nn")
+
+[node name="FirePoint" parent="Top" index="0"]
+position = Vector2(56, 0)

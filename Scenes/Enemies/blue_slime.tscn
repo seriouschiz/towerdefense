@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://c4i6eed5nou00"]
+
+[ext_resource type="PackedScene" uid="uid://cdojr6eeufb47" path="res://Scenes/Enemies/enemy_template.tscn" id="1_rqeh2"]
+[ext_resource type="Script" uid="uid://bjsbircoxmya8" path="res://Scenes/Enemies/blue_slime.gd" id="2_tn05o"]
+[ext_resource type="Texture2D" uid="uid://bab4jeukoffbf" path="res://Resources/Images/Enemies/slime.png" id="3_1nyxw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb52p"]
+atlas = ExtResource("3_1nyxw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sscmc"]
+atlas = ExtResource("3_1nyxw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8lysa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xb52p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sscmc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mqxmk"]
+radius = 20.0998
+
+[node name="BlueSlime" instance=ExtResource("1_rqeh2")]
+script = ExtResource("2_tn05o")
+speed = 100
+maxhealth = 25.0
+value = 20
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_8lysa")
+
+[node name="CollisionShape2D" parent="CharacterBody2D" index="0"]
+shape = SubResource("CircleShape2D_mqxmk")

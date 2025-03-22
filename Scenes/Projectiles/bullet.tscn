@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://qlnpkq0xay6s"]
+
+[ext_resource type="PackedScene" uid="uid://ukr0ndovx342" path="res://Scenes/Projectiles/projectile_template.tscn" id="1_apm0q"]
+[ext_resource type="Script" uid="uid://d33x8fe5wii75" path="res://Scenes/Projectiles/bullet.gd" id="2_vxt2s"]
+[ext_resource type="Texture2D" uid="uid://x1wvfwh075s6" path="res://Resources/Images/Projectiles/Bullet.png" id="3_w4j0o"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h0r63"]
+radius = 8.65
+
+[node name="Bullet" instance=ExtResource("1_apm0q")]
+script = ExtResource("2_vxt2s")
+speed = 500
+dmg_name = "Bullet"
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_h0r63")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_w4j0o")

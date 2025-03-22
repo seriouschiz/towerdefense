@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://clhmx7wfljcy"]
+
+[ext_resource type="PackedScene" uid="uid://qkw36v3qxyqt" path="res://Scenes/Effects/effect_template.tscn" id="1_vmxwi"]
+[ext_resource type="Script" uid="uid://clj6pko5cjgso" path="res://Scenes/Effects/effect_burning.gd" id="2_suvf0"]
+[ext_resource type="Texture2D" uid="uid://d3hlwn0v1i8pn" path="res://Resources/Images/Particles/FireParticle.png" id="3_lkg7o"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1olmh"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 32.0
+gravity = Vector3(0, -25, 0)
+linear_accel_min = 25.81
+linear_accel_max = 66.67
+scale_min = 0.1
+scale_max = 0.3
+turbulence_noise_scale = 5.0
+
+[node name="Burning" instance=ExtResource("1_vmxwi")]
+script = ExtResource("2_suvf0")
+dmg_name = "Burning"
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="2"]
+texture = ExtResource("3_lkg7o")
+process_material = SubResource("ParticleProcessMaterial_1olmh")

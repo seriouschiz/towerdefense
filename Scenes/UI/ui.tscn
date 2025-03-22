@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=3 uid="uid://16fpuwrsv6j8"]
+
+[ext_resource type="Script" uid="uid://bw4fordqks06c" path="res://Scenes/UI/ui.gd" id="1_s7d8m"]
+[ext_resource type="LabelSettings" uid="uid://dm0wmvo4tpcum" path="res://ui_label_settings.tres" id="2_g2a6y"]
+
+[node name="ui" type="CanvasLayer"]
+script = ExtResource("1_s7d8m")
+
+[node name="StatsContainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthHbox" type="HBoxContainer" parent="StatsContainer"]
+layout_mode = 2
+
+[node name="HealthText" type="Label" parent="StatsContainer/HealthHbox"]
+layout_mode = 2
+text = "HP:"
+label_settings = ExtResource("2_g2a6y")
+
+[node name="HealthAmount" type="Label" parent="StatsContainer/HealthHbox"]
+layout_mode = 2
+text = "20"
+label_settings = ExtResource("2_g2a6y")
+
+[node name="MoneyHbox" type="HBoxContainer" parent="StatsContainer"]
+layout_mode = 2
+
+[node name="MoneyText" type="Label" parent="StatsContainer/MoneyHbox"]
+layout_mode = 2
+text = "$"
+label_settings = ExtResource("2_g2a6y")
+
+[node name="MoneyAmount" type="Label" parent="StatsContainer/MoneyHbox"]
+layout_mode = 2
+text = "200"
+label_settings = ExtResource("2_g2a6y")
+
+[node name="EnemiesHbox" type="HBoxContainer" parent="StatsContainer"]
+layout_mode = 2
+
+[node name="EnemiesText" type="Label" parent="StatsContainer/EnemiesHbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Enemies left:"
+
+[node name="EnemiesAmount" type="Label" parent="StatsContainer/EnemiesHbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "69"
+
+[node name="BuildButtonsContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -70.0
+offset_right = 25.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+
+[node name="StartWaveButton" type="Button" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -66.5
+offset_top = 15.0
+offset_right = 66.5
+offset_bottom = 46.0
+grow_horizontal = 2
+text = "Start Next Wave"
+
+[connection signal="pressed" from="StartWaveButton" to="." method="_on_start_wave_button_pressed"]

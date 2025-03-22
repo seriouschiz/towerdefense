@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://cm71uekx1jt18"]
+
+[ext_resource type="PackedScene" uid="uid://cueq4spghr5e7" path="res://Scenes/Towers/tower_template.tscn" id="1_pf4mb"]
+[ext_resource type="Script" uid="uid://c3uti5poq2pmb" path="res://Scenes/Towers/ballista.gd" id="2_7g5ne"]
+[ext_resource type="Texture2D" uid="uid://iy8kv81ghhsp" path="res://Resources/Images/Towers/Ballista/Ballista_icon.png" id="3_l74cr"]
+[ext_resource type="PackedScene" uid="uid://dwhhngyryohav" path="res://Scenes/Projectiles/arrow.tscn" id="4_a0wi8"]
+[ext_resource type="Texture2D" uid="uid://7g1l0nk3r87y" path="res://Resources/Images/Towers/Ballista/Ballista_base.png" id="4_dqed5"]
+[ext_resource type="Texture2D" uid="uid://cqvpae14o1tn8" path="res://Resources/Images/Towers/Ballista/Ballista_top.png" id="5_dh5ph"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nyb4x"]
+radius = 34.0
+
+[node name="Ballista" instance=ExtResource("1_pf4mb")]
+script = ExtResource("2_7g5ne")
+type = "Ballista"
+cost = 180
+icon = ExtResource("3_l74cr")
+projectile_type = ExtResource("4_a0wi8")
+attack_range = 500
+damage = 15
+attack_cd = 2.5
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_nyb4x")
+
+[node name="Base" parent="." index="2"]
+texture = ExtResource("4_dqed5")
+
+[node name="Top" parent="." index="3"]
+texture = ExtResource("5_dh5ph")

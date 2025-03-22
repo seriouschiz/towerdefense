@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://qg6ugpqg2v1y"]
+
+[ext_resource type="PackedScene" uid="uid://cdojr6eeufb47" path="res://Scenes/Enemies/enemy_template.tscn" id="1_q16cy"]
+[ext_resource type="Texture2D" uid="uid://b5e6qk5iya400" path="res://Resources/Images/Enemies/redslime.png" id="2_hnins"]
+[ext_resource type="Script" uid="uid://bhq13k7407atj" path="res://Scenes/Enemies/red_slime.gd" id="2_t4sdv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7lnt"]
+atlas = ExtResource("2_hnins")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bk6j"]
+atlas = ExtResource("2_hnins")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8qlug"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7lnt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bk6j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mqxmk"]
+radius = 20.0998
+
+[node name="RedSlime" instance=ExtResource("1_q16cy")]
+script = ExtResource("2_t4sdv")
+speed = 80
+maxhealth = 40.0
+value = 30
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_8qlug")
+frame_progress = 0.732097
+
+[node name="CollisionShape2D" parent="CharacterBody2D" index="0"]
+shape = SubResource("CircleShape2D_mqxmk")

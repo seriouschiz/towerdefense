@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://bk2b7etxaq4sx"]
+
+[ext_resource type="PackedScene" uid="uid://bga6bepffh26e" path="res://Scenes/Levels/level_template.tscn" id="1_gggha"]
+[ext_resource type="Script" uid="uid://c7ltrvn2b7akh" path="res://Scenes/Levels/level_01.gd" id="2_pyd58"]
+[ext_resource type="Texture2D" uid="uid://c7nmmurrjfhec" path="res://Resources/Images/Backgrounds/Level01.png" id="2_yha0q"]
+[ext_resource type="PackedScene" uid="uid://dk8c781sakb16" path="res://Scenes/player.tscn" id="4_er6co"]
+
+[sub_resource type="Curve2D" id="Curve2D_prv8r"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -655, -614, -1.7818, -51.6721, 1.7818, 51.6721, -643, -112, 0, 0, 0, 0, -572, -50, -73.0537, 0, 73.0537, 0, -11, -25, 0, 0, 0, 0, 46, -82, -3.56359, 60.5811, 3.56359, -60.5811, 47, -248, 0, 0, 0, 0, 110, -315, -75.7264, -1.7818, 75.7264, 1.7818, 471, -305, 0, 0, 0, 0, 547, -221, -2.6727, -52.563, 2.6727, 52.563, 551, 209, 0, 0, 0, 0, 488, 254, 57.9084, 3.56359, -57.9084, -3.56359, 242, 260, 0, 0, 0, 0, 184, 227, 1.7818, 56.1266, -1.7818, -56.1266, 186, 168, 0, 0, 0, 0, 159, 124, 37.4177, -1.7818, -37.4177, 1.7818, 58, 127, 0, 0, 0, 0, 20, 173, 0, 0, 0, 0, 22, 630)
+}
+point_count = 18
+
+[node name="Level01" instance=ExtResource("1_gggha")]
+script = ExtResource("2_pyd58")
+
+[node name="BackgroundSprite" parent="." index="2"]
+texture = ExtResource("2_yha0q")
+
+[node name="CollisionPolygon2D" parent="BuildableArea" index="0"]
+polygon = PackedVector2Array(-708, -538, -699, -407, -695, -241, -697, -161, -684, -86, -652, -35, -582, -11, -346, 10, -191, 24, 18, 23, 68, 4, 89, -27, 96, -119, 92, -262, 123, -272, 228, -272, 324, -258, 471, -265, 492, -263, 503, -245, 511, -50, 512, -29, 511, 73, 511, 210, 378, 210, 337, 220, 239, 222, 236, 138, 223, 102, 191, 81, 28, 78, -3, 94, -26, 126, -26, 223, -51, 370, -43, 442, -37, 487, -19, 540, 82, 540, 57, 464, 57, 419, 46, 382, 60, 284, 72, 235, 75, 172, 139, 172, 142, 269, 155, 297, 185, 312, 229, 317, 336, 313, 378, 302, 454, 305, 543, 305, 572, 294, 605, 245, 605, 90, 605, -48, 599, -243, 579, -302, 526, -347, 460, -357, 340, -352, 208, -367, 96, -361, 39, -343, 1, -302, 2, -70, -299, -74, -581, -107, -603, -124, -606, -418, -615, -540)
+
+[node name="Enemies" parent="." index="6"]
+curve = SubResource("Curve2D_prv8r")
+
+[node name="Player" parent="." index="7" instance=ExtResource("4_er6co")]
+
+[node name="Camera2D" type="Camera2D" parent="." index="8"]

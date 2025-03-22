@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://qkw36v3qxyqt"]
+
+[ext_resource type="Script" uid="uid://c37yfaplnvhu4" path="res://Scenes/Effects/effect_template.gd" id="1_fm5hv"]
+
+[node name="Effect" type="Node2D"]
+script = ExtResource("1_fm5hv")
+
+[node name="duration" type="Timer" parent="."]
+one_shot = true
+
+[node name="tick" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="duration" to="." method="_on_duration_timeout"]
+[connection signal="timeout" from="tick" to="." method="_on_tick_timeout"]

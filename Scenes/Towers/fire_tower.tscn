@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://idrul37nitjy"]
+
+[ext_resource type="PackedScene" uid="uid://cueq4spghr5e7" path="res://Scenes/Towers/tower_template.tscn" id="1_axs5n"]
+[ext_resource type="Texture2D" uid="uid://csyj04pnj76jq" path="res://Resources/Images/Towers/FireTower/FireTower.png" id="2_1p0ey"]
+[ext_resource type="Script" uid="uid://cm4mqsyjtxelg" path="res://Scenes/Towers/fire_tower.gd" id="2_lpo0w"]
+[ext_resource type="PackedScene" uid="uid://bw1htv4eyrcfv" path="res://Scenes/Projectiles/fire_ring.tscn" id="4_y30tc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_huf6k"]
+size = Vector2(64, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uhs3r"]
+radius = 64.0
+
+[node name="FireTower" instance=ExtResource("1_axs5n")]
+script = ExtResource("2_lpo0w")
+type = "Fire Tower"
+cost = 250
+icon = ExtResource("2_1p0ey")
+projectile_type = ExtResource("4_y30tc")
+attack_range = 128
+damage = 4
+attack_cd = 8.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(-1.5, 1.5)
+shape = SubResource("RectangleShape2D_huf6k")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="AttackRange" index="1"]
+shape = SubResource("CircleShape2D_uhs3r")
+
+[node name="Base" parent="." index="2"]
+scale = Vector2(1, 1)
+texture = ExtResource("2_1p0ey")
+offset = Vector2(-2, 4)
+
+[node name="Top" parent="." index="3"]
+offset = Vector2(-2, 4)
