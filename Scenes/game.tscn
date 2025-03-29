@@ -1,15 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://co7bgiy1bck71"]
 
 [ext_resource type="Script" uid="uid://c8dhhu48kj1y8" path="res://Scenes/GameManager.gd" id="1_0c6fu"]
-[ext_resource type="PackedScene" uid="uid://bk2b7etxaq4sx" path="res://Scenes/Levels/level_01.tscn" id="2_g7mfk"]
+[ext_resource type="PackedScene" uid="uid://dsxqrm3k8hcik" path="res://Scenes/UI/main_menu.tscn" id="2_qxrlw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wke3x"]
 size = Vector2(1e+06, 1e+06)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_0c6fu")
-
-[node name="Level01" parent="." instance=ExtResource("2_g7mfk")]
 
 [node name="CollisionNotSetDetector" type="Area2D" parent="."]
 collision_layer = 0
@@ -18,3 +16,7 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionNotSetDetector"]
 shape = SubResource("RectangleShape2D_wke3x")
 debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="MainMenu" parent="." instance=ExtResource("2_qxrlw")]
+
+[connection signal="load_level" from="MainMenu" to="." method="_on_main_menu_load_level"]

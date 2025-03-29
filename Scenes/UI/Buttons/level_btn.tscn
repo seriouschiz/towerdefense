@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c76tlg02tklw6"]
+
+[ext_resource type="Script" uid="uid://bynbv23bon5hc" path="res://Scenes/UI/Buttons/level_btn.gd" id="1_8200c"]
+
+[node name="LevelBtn" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_8200c")

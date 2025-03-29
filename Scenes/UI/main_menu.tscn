@@ -1,0 +1,372 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsxqrm3k8hcik"]
+
+[ext_resource type="Script" uid="uid://ds3sisfhwpog5" path="res://Scenes/UI/main_menu.gd" id="1_5wsvm"]
+
+[node name="MainMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 80
+script = ExtResource("1_5wsvm")
+
+[node name="BackgroundPnl" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="MenuPnl" type="Panel" parent="BackgroundPnl"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -120.0
+offset_right = 110.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="BackgroundPnl/MenuPnl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="BackgroundPnl/MenuPnl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Roulette TD"
+horizontal_alignment = 1
+
+[node name="SingleplayerBtn" type="Button" parent="BackgroundPnl/MenuPnl/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Play Single Player"
+
+[node name="MultiplayerBtn" type="Button" parent="BackgroundPnl/MenuPnl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Play Multi Player"
+
+[node name="OptionsBtn" type="Button" parent="BackgroundPnl/MenuPnl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Options"
+
+[node name="ExitBtn" type="Button" parent="BackgroundPnl/MenuPnl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Exit Game"
+
+[node name="MultiplayerPnl" type="Panel" parent="BackgroundPnl"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -120.0
+offset_right = 110.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="BackgroundPnl/MultiplayerPnl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="BackgroundPnl/MultiplayerPnl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Multiplayer"
+horizontal_alignment = 1
+
+[node name="HostBtn" type="Button" parent="BackgroundPnl/MultiplayerPnl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Host Lobby"
+
+[node name="EnetBtn" type="Button" parent="BackgroundPnl/MultiplayerPnl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Join Via IP"
+
+[node name="SteamBtn" type="Button" parent="BackgroundPnl/MultiplayerPnl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Join Via Steam"
+
+[node name="BackBtn" type="Button" parent="BackgroundPnl/MultiplayerPnl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Back"
+
+[node name="LevelSelectPnl" type="Panel" parent="BackgroundPnl"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -323.0
+offset_top = -182.0
+offset_right = 323.0
+offset_bottom = 182.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelGrid" type="GridContainer" parent="BackgroundPnl/LevelSelectPnl"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BackBtn" type="Button" parent="BackgroundPnl/LevelSelectPnl"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -22.5
+offset_top = 15.0
+offset_right = 22.5
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Back"
+
+[node name="EnetPnl" type="Panel" parent="BackgroundPnl"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -120.0
+offset_right = 110.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="BackgroundPnl/EnetPnl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="BackgroundPnl/EnetPnl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Join Via IP"
+horizontal_alignment = 1
+
+[node name="IPLabel" type="Label" parent="BackgroundPnl/EnetPnl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "IP Address"
+horizontal_alignment = 1
+
+[node name="IPText" type="LineEdit" parent="BackgroundPnl/EnetPnl/HBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter IP Address Here"
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="BackgroundPnl/EnetPnl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Username"
+horizontal_alignment = 1
+
+[node name="NameText" type="LineEdit" parent="BackgroundPnl/EnetPnl/HBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter Username Here"
+alignment = 1
+
+[node name="ConnectBtn" type="Button" parent="BackgroundPnl/EnetPnl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Connect"
+
+[node name="IPBackBtn" type="Button" parent="BackgroundPnl/EnetPnl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Back"
+
+[node name="HostPnl" type="Panel" parent="BackgroundPnl"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -145.0
+offset_right = 110.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="BackgroundPnl/HostPnl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="BackgroundPnl/HostPnl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Host Game"
+horizontal_alignment = 1
+
+[node name="NameLabel" type="Label" parent="BackgroundPnl/HostPnl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Username"
+horizontal_alignment = 1
+
+[node name="NameText" type="LineEdit" parent="BackgroundPnl/HostPnl/HBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter Username Here"
+alignment = 1
+
+[node name="LobbyNameLabel" type="Label" parent="BackgroundPnl/HostPnl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Lobby Name"
+horizontal_alignment = 1
+
+[node name="LobbyNameText" type="LineEdit" parent="BackgroundPnl/HostPnl/HBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter Lobby Name Here"
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BackgroundPnl/HostPnl/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SteamLabel" type="Label" parent="BackgroundPnl/HostPnl/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Host Using Steam?"
+
+[node name="SteamCheck" type="CheckButton" parent="BackgroundPnl/HostPnl/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ConnectBtn" type="Button" parent="BackgroundPnl/HostPnl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Create Lobby"
+
+[node name="HostBackBtn" type="Button" parent="BackgroundPnl/HostPnl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Back"
+
+[node name="Panel" type="Panel" parent="BackgroundPnl"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -120.0
+offset_right = 110.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="BackgroundPnl/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="BackgroundPnl/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Join Via IP"
+horizontal_alignment = 1
+
+[node name="IPLabel" type="Label" parent="BackgroundPnl/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "IP Address"
+horizontal_alignment = 1
+
+[node name="IPText" type="LineEdit" parent="BackgroundPnl/Panel/HBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter IP Address Here"
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="BackgroundPnl/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Username"
+horizontal_alignment = 1
+
+[node name="NameText" type="LineEdit" parent="BackgroundPnl/Panel/HBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter Username Here"
+alignment = 1
+
+[node name="ConnectBtn" type="Button" parent="BackgroundPnl/Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Connect"
+
+[node name="IPBackBtn" type="Button" parent="BackgroundPnl/Panel/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Back"
+
+[connection signal="pressed" from="BackgroundPnl/MenuPnl/HBoxContainer/SingleplayerBtn" to="." method="_on_singleplayer_btn_pressed"]
+[connection signal="pressed" from="BackgroundPnl/MenuPnl/HBoxContainer/MultiplayerBtn" to="." method="_on_multiplayer_btn_pressed"]
+[connection signal="pressed" from="BackgroundPnl/MenuPnl/HBoxContainer/OptionsBtn" to="." method="_on_options_btn_pressed"]
+[connection signal="pressed" from="BackgroundPnl/MenuPnl/HBoxContainer/ExitBtn" to="." method="_on_exit_btn_pressed"]
+[connection signal="pressed" from="BackgroundPnl/MultiplayerPnl/HBoxContainer/EnetBtn" to="." method="_on_enet_btn_pressed"]
+[connection signal="pressed" from="BackgroundPnl/MultiplayerPnl/HBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="BackgroundPnl/LevelSelectPnl/BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="BackgroundPnl/EnetPnl/HBoxContainer/IPBackBtn" to="." method="_on_ip_back_btn_pressed"]
+[connection signal="toggled" from="BackgroundPnl/HostPnl/HBoxContainer/HBoxContainer/SteamCheck" to="." method="_on_steam_check_toggled"]
+[connection signal="pressed" from="BackgroundPnl/HostPnl/HBoxContainer/HostBackBtn" to="." method="_on_host_back_btn_pressed"]

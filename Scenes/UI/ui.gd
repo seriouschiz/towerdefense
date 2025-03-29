@@ -10,7 +10,7 @@ signal start_wave()
 @onready var enemies_amount: Label = $StatsContainer/EnemiesHbox/EnemiesAmount
 @onready var build_buttons_container: HBoxContainer = $BuildButtonsContainer
 @onready var start_wave_button: Button = $StartWaveButton
-var tower_button: PackedScene = preload("res://Scenes/UI/tower_button.tscn")
+var tower_button: PackedScene = preload("res://Scenes/UI/Buttons/tower_button.tscn")
 
 func _ready() -> void:
 	update_all()
@@ -18,11 +18,11 @@ func _ready() -> void:
 	Globals.connect("player_stat_change",update_all)
 
 func update_buttons():
-	for tower in GameManager.TowerTypes:
-		var twr = tower.instantiate()
+	for tower in Game.towers:
+		var twr = Game.towers[tower].instantiate()
 		var button = tower_button.instantiate()
 		button.icon = twr.icon
-		button.scene = tower
+		button.scene = Game.towers[tower]
 		button.text = str(twr.cost)
 		button.twr_btn.connect(tower_button_pressed)
 		build_buttons_container.add_child(button)

@@ -1,7 +1,6 @@
 extends Node
 
-var TowerTypes = [
-		preload("res://Scenes/Towers/basic_turret.tscn"),
-		preload("res://Scenes/Towers/ballista.tscn"),
-		preload("res://Scenes/Towers/fire_tower.tscn"),
-		]
+func _on_main_menu_load_level(lvl: PackedScene) -> void:
+	var lvl_to_load = lvl.instantiate()
+	$MainMenu.queue_free()
+	self.add_child(lvl_to_load)

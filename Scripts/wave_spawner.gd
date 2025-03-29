@@ -7,21 +7,21 @@ var current_wave:int = 0
 
 var waves = [ # ARGUMENTS: PackedScene for enemy type, amount of enemies to spawn, time between spawns
 	[ # WAVE 1
-		make_wave(Globals.enemy_types.blue_slime,3,2.0),
-		make_wave(Globals.enemy_types.blue_slime,1,4.0),
-		make_wave(Globals.enemy_types.blue_slime,2,1.0),
+		make_wave(Game.enemies.blue_slime,3,2.0),
+		make_wave(Game.enemies.blue_slime,1,4.0),
+		make_wave(Game.enemies.blue_slime,2,1.0),
 	],
 	[ # WAVE 2
-		make_wave(Globals.enemy_types.red_slime,4,2.5),
-		make_wave(Globals.enemy_types.blue_slime,1,4.0),
-		make_wave(Globals.enemy_types.blue_slime,2,0.8),
-		make_wave(Globals.enemy_types.red_slime,2,0.8),
+		make_wave(Game.enemies.red_slime,4,2.5),
+		make_wave(Game.enemies.blue_slime,1,4.0),
+		make_wave(Game.enemies.blue_slime,2,0.8),
+		make_wave(Game.enemies.red_slime,2,0.8),
 	],
 	[ # WAVE 3
-		make_wave(Globals.enemy_types.red_slime,7,1.5),
-		make_wave(Globals.enemy_types.red_slime,1,5.0),
-		make_wave(Globals.enemy_types.blue_slime,10,0.6),
-		make_wave(Globals.enemy_types.red_slime,2,0.8),
+		make_wave(Game.enemies.red_slime,7,1.5),
+		make_wave(Game.enemies.red_slime,1,5.0),
+		make_wave(Game.enemies.blue_slime,10,0.6),
+		make_wave(Game.enemies.red_slime,2,0.8),
 	],
 ]
 
