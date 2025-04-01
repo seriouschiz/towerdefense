@@ -3,6 +3,11 @@ extends CharacterBody2D
 @export var speed: int = 400
 @onready var camera: Camera2D = $Camera2D
 
+var player_name: String
+var player_id := 1:
+	set(id):
+		player_id=id
+
 func get_input():
 	var input_direction = Input.get_vector("MoveLeft","MoveRight","MoveUp","MoveDown")
 	velocity = input_direction * speed

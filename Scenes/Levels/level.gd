@@ -16,6 +16,10 @@ func _ready() -> void:
 	ui.connect("start_wave",start_wave)
 	enemies.connect("spawn_enemy",create_enemy)
 	enemies.connect("wave_complete",wave_complete)
+	
+	if (get_tree().get_nodes_in_group("Players").size() < 1):
+		var player = preload("res://Scenes/player.tscn").instantiate()
+		add_child(player)
 
 func get_towers():
 	for tower in get_tree().get_nodes_in_group("Towers"):

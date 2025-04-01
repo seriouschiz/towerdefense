@@ -71,7 +71,6 @@ text = "Exit Game"
 
 [node name="MultiplayerPnl" type="Panel" parent="BackgroundPnl"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -223,6 +222,7 @@ text = "Back"
 
 [node name="HostPnl" type="Panel" parent="BackgroundPnl"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -286,7 +286,7 @@ text = "Host Using Steam?"
 [node name="SteamCheck" type="CheckButton" parent="BackgroundPnl/HostPnl/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="ConnectBtn" type="Button" parent="BackgroundPnl/HostPnl/HBoxContainer"]
+[node name="CreateLobbyBtn" type="Button" parent="BackgroundPnl/HostPnl/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Create Lobby"
@@ -364,9 +364,13 @@ text = "Back"
 [connection signal="pressed" from="BackgroundPnl/MenuPnl/HBoxContainer/MultiplayerBtn" to="." method="_on_multiplayer_btn_pressed"]
 [connection signal="pressed" from="BackgroundPnl/MenuPnl/HBoxContainer/OptionsBtn" to="." method="_on_options_btn_pressed"]
 [connection signal="pressed" from="BackgroundPnl/MenuPnl/HBoxContainer/ExitBtn" to="." method="_on_exit_btn_pressed"]
+[connection signal="pressed" from="BackgroundPnl/MultiplayerPnl/HBoxContainer/HostBtn" to="." method="_on_host_btn_pressed"]
 [connection signal="pressed" from="BackgroundPnl/MultiplayerPnl/HBoxContainer/EnetBtn" to="." method="_on_enet_btn_pressed"]
 [connection signal="pressed" from="BackgroundPnl/MultiplayerPnl/HBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="BackgroundPnl/LevelSelectPnl/BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="text_changed" from="BackgroundPnl/EnetPnl/HBoxContainer/IPText" to="." method="_on_ip_text_changed"]
+[connection signal="pressed" from="BackgroundPnl/EnetPnl/HBoxContainer/ConnectBtn" to="." method="_on_connect_btn_pressed"]
 [connection signal="pressed" from="BackgroundPnl/EnetPnl/HBoxContainer/IPBackBtn" to="." method="_on_ip_back_btn_pressed"]
 [connection signal="toggled" from="BackgroundPnl/HostPnl/HBoxContainer/HBoxContainer/SteamCheck" to="." method="_on_steam_check_toggled"]
+[connection signal="pressed" from="BackgroundPnl/HostPnl/HBoxContainer/CreateLobbyBtn" to="." method="_on_create_lobby_btn_pressed"]
 [connection signal="pressed" from="BackgroundPnl/HostPnl/HBoxContainer/HostBackBtn" to="." method="_on_host_back_btn_pressed"]

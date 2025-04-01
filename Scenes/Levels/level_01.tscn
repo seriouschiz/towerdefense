@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk2b7etxaq4sx"]
+[gd_scene load_steps=5 format=3 uid="uid://bk2b7etxaq4sx"]
 
 [ext_resource type="PackedScene" uid="uid://bga6bepffh26e" path="res://Scenes/Levels/level_template.tscn" id="1_gggha"]
 [ext_resource type="Script" uid="uid://c7ltrvn2b7akh" path="res://Scenes/Levels/level_01.gd" id="2_pyd58"]
 [ext_resource type="Texture2D" uid="uid://c7nmmurrjfhec" path="res://Resources/Images/Backgrounds/Level01.png" id="2_yha0q"]
-[ext_resource type="PackedScene" uid="uid://dk8c781sakb16" path="res://Scenes/player.tscn" id="4_er6co"]
 
 [sub_resource type="Curve2D" id="Curve2D_prv8r"]
 _data = {
@@ -22,7 +21,3 @@ polygon = PackedVector2Array(-708, -538, -699, -407, -695, -241, -697, -161, -68
 
 [node name="Enemies" parent="." index="6"]
 curve = SubResource("Curve2D_prv8r")
-
-[node name="Player" parent="." index="7" instance=ExtResource("4_er6co")]
-
-[node name="Camera2D" type="Camera2D" parent="." index="8"]

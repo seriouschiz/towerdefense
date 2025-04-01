@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dnfju6ugn3ag7"]
+
+[node name="MultiplayerLobby" type="MarginContainer"]
+offset_right = 40.0
+offset_bottom = 40.0

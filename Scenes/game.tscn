@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://co7bgiy1bck71"]
+[gd_scene load_steps=5 format=3 uid="uid://co7bgiy1bck71"]
 
 [ext_resource type="Script" uid="uid://c8dhhu48kj1y8" path="res://Scenes/GameManager.gd" id="1_0c6fu"]
 [ext_resource type="PackedScene" uid="uid://dsxqrm3k8hcik" path="res://Scenes/UI/main_menu.tscn" id="2_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://dnfju6ugn3ag7" path="res://Scenes/UI/multiplayer_lobby.tscn" id="3_wrm1d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wke3x"]
 size = Vector2(1e+06, 1e+06)
@@ -19,4 +20,14 @@ debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="MainMenu" parent="." instance=ExtResource("2_qxrlw")]
 
+[node name="MultiplayerLobby" parent="." instance=ExtResource("3_wrm1d")]
+visible = false
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://dk8c781sakb16")
+spawn_path = NodePath("../Players")
+
+[node name="Players" type="Node2D" parent="."]
+
 [connection signal="load_level" from="MainMenu" to="." method="_on_main_menu_load_level"]
+[connection signal="show_multiplayer_lobby" from="MainMenu" to="." method="_on_main_menu_show_multiplayer_lobby"]
