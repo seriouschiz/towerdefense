@@ -7,6 +7,20 @@ var player_name: String
 var player_id := 1:
 	set(id):
 		player_id=id
+		$InputSynchronizer.set_multiplayer_authority(id)
+
+func _ready() -> void:
+	multiplayer.connected_to_server.connect(_set_up_mp_authority)
+
+func _set_up_mp_authority():
+	print("Connected to server")
+	if get_multiplayer_authority() != multiplayer.get_unique_id():
+		set_process(false)
+		set_physics_process(false)
+	print(str(name," id = ",player_id))
+	Globals.multiplayer_id = player_id
+	print(str("MP ID: ", Globals.multiplayer_id))
+	player_name = Globals.player_name
 
 func get_input():
 	var input_direction = Input.get_vector("MoveLeft","MoveRight","MoveUp","MoveDown")

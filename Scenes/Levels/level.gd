@@ -12,12 +12,13 @@ var currently_building: Tower
 var tower_array = []
 
 func _ready() -> void:
+	MultiplayerManager.player_loaded.rpc_id(1) # Tell the server that this peer has loaded
 	get_towers()
 	ui.connect("start_wave",start_wave)
 	enemies.connect("spawn_enemy",create_enemy)
 	enemies.connect("wave_complete",wave_complete)
 	
-	if (get_tree().get_nodes_in_group("Players").size() < 1):
+	if (get_tree().get_nodes_in_group("Players").size() < 1) and MultiplayerManager.multiplayer_mode == false:
 		var player = preload("res://Scenes/player.tscn").instantiate()
 		add_child(player)
 

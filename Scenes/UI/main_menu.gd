@@ -1,29 +1,13 @@
 extends MarginContainer
 
-var selected_level: PackedScene
-@onready var level_grid: GridContainer = $BackgroundPnl/LevelSelectPnl/LevelGrid
-const LEVEL_BTN = preload("res://Scenes/UI/Buttons/level_btn.tscn")
-
 var use_steam:bool = false
-var server_ip:String
+var server_ip:String = "127.0.0.1"
 
-signal load_level(lvl:PackedScene)
+signal load_level()
 signal show_multiplayer_lobby
 
-func _ready() -> void:
-	for level in Game.levels:
-		var lvl_btn = LEVEL_BTN.instantiate()
-		lvl_btn.text = level
-		lvl_btn.level = Game.levels[level]
-		level_grid.add_child(lvl_btn)
-		lvl_btn.lvl_btn.connect(select_level)
-
-func select_level(lvl:PackedScene):
-	selected_level = lvl
-	_load_level()
-
 func _load_level():
-	load_level.emit(selected_level)
+	load_level.emit()
 
 #region MenuPnl
 func _on_singleplayer_btn_pressed() -> void:
@@ -83,3 +67,6 @@ func _on_connect_btn_pressed() -> void:
 
 func _on_ip_text_changed(new_text: String) -> void:
 	server_ip = new_text
+
+func _set_name(text: String) -> void:
+	MultiplayerManager.player_info.player_name = text

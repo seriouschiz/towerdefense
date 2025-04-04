@@ -28,6 +28,7 @@ Towers=""
 Enemies=""
 Projectiles=""
 Players=""
+PlayerSpawnNode=""
 
 [input]
 

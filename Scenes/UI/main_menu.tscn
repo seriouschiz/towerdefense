@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsxqrm3k8hcik"]
+[gd_scene load_steps=3 format=3 uid="uid://dsxqrm3k8hcik"]
 
 [ext_resource type="Script" uid="uid://ds3sisfhwpog5" path="res://Scenes/UI/main_menu.gd" id="1_5wsvm"]
+[ext_resource type="PackedScene" uid="uid://cg3mmvabihu81" path="res://Scenes/UI/MainMenu/level_select_pnl.tscn" id="2_i2xx2"]
 
 [node name="MainMenu" type="MarginContainer"]
 anchors_preset = 15
@@ -19,7 +20,6 @@ layout_mode = 2
 
 [node name="MenuPnl" type="Panel" parent="BackgroundPnl"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -71,6 +71,7 @@ text = "Exit Game"
 
 [node name="MultiplayerPnl" type="Panel" parent="BackgroundPnl"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -119,41 +120,10 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Back"
 
-[node name="LevelSelectPnl" type="Panel" parent="BackgroundPnl"]
+[node name="LevelSelectPnl" parent="BackgroundPnl" instance=ExtResource("2_i2xx2")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -323.0
-offset_top = -182.0
-offset_right = 323.0
-offset_bottom = 182.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="LevelGrid" type="GridContainer" parent="BackgroundPnl/LevelSelectPnl"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="BackBtn" type="Button" parent="BackgroundPnl/LevelSelectPnl"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -22.5
-offset_top = 15.0
-offset_right = 22.5
-offset_bottom = 46.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "Back"
 
 [node name="EnetPnl" type="Panel" parent="BackgroundPnl"]
 unique_name_in_owner = true
@@ -195,6 +165,7 @@ horizontal_alignment = 1
 
 [node name="IPText" type="LineEdit" parent="BackgroundPnl/EnetPnl/HBoxContainer"]
 layout_mode = 2
+text = "127.0.0.1"
 placeholder_text = "Enter IP Address Here"
 alignment = 1
 
@@ -251,18 +222,6 @@ theme_override_font_sizes/font_size = 32
 text = "Host Game"
 horizontal_alignment = 1
 
-[node name="NameLabel" type="Label" parent="BackgroundPnl/HostPnl/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 12
-text = "Username"
-horizontal_alignment = 1
-
-[node name="NameText" type="LineEdit" parent="BackgroundPnl/HostPnl/HBoxContainer"]
-layout_mode = 2
-placeholder_text = "Enter Username Here"
-alignment = 1
-
 [node name="LobbyNameLabel" type="Label" parent="BackgroundPnl/HostPnl/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -273,6 +232,18 @@ horizontal_alignment = 1
 [node name="LobbyNameText" type="LineEdit" parent="BackgroundPnl/HostPnl/HBoxContainer"]
 layout_mode = 2
 placeholder_text = "Enter Lobby Name Here"
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="BackgroundPnl/HostPnl/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Username"
+horizontal_alignment = 1
+
+[node name="NameText" type="LineEdit" parent="BackgroundPnl/HostPnl/HBoxContainer"]
+layout_mode = 2
+placeholder_text = "Enter Username Here"
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BackgroundPnl/HostPnl/HBoxContainer"]
@@ -367,10 +338,12 @@ text = "Back"
 [connection signal="pressed" from="BackgroundPnl/MultiplayerPnl/HBoxContainer/HostBtn" to="." method="_on_host_btn_pressed"]
 [connection signal="pressed" from="BackgroundPnl/MultiplayerPnl/HBoxContainer/EnetBtn" to="." method="_on_enet_btn_pressed"]
 [connection signal="pressed" from="BackgroundPnl/MultiplayerPnl/HBoxContainer/BackBtn" to="." method="_on_back_btn_pressed"]
-[connection signal="pressed" from="BackgroundPnl/LevelSelectPnl/BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="load_level" from="BackgroundPnl/LevelSelectPnl" to="." method="_load_level"]
 [connection signal="text_changed" from="BackgroundPnl/EnetPnl/HBoxContainer/IPText" to="." method="_on_ip_text_changed"]
+[connection signal="text_changed" from="BackgroundPnl/EnetPnl/HBoxContainer/NameText" to="." method="_set_name"]
 [connection signal="pressed" from="BackgroundPnl/EnetPnl/HBoxContainer/ConnectBtn" to="." method="_on_connect_btn_pressed"]
 [connection signal="pressed" from="BackgroundPnl/EnetPnl/HBoxContainer/IPBackBtn" to="." method="_on_ip_back_btn_pressed"]
+[connection signal="text_changed" from="BackgroundPnl/HostPnl/HBoxContainer/NameText" to="." method="_set_name"]
 [connection signal="toggled" from="BackgroundPnl/HostPnl/HBoxContainer/HBoxContainer/SteamCheck" to="." method="_on_steam_check_toggled"]
 [connection signal="pressed" from="BackgroundPnl/HostPnl/HBoxContainer/CreateLobbyBtn" to="." method="_on_create_lobby_btn_pressed"]
 [connection signal="pressed" from="BackgroundPnl/HostPnl/HBoxContainer/HostBackBtn" to="." method="_on_host_back_btn_pressed"]

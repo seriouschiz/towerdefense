@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://br6xktjdds1d"]
+
+[ext_resource type="Script" uid="uid://chb8w7h5brhd5" path="res://Scenes/UI/lobby_item.gd" id="1_cbngd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cbngd"]
+
+[node name="LobbyItem" type="HBoxContainer"]
+offset_right = 459.0
+offset_bottom = 40.0
+alignment = 1
+script = ExtResource("1_cbngd")
+
+[node name="PlayerName" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player Name"
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 25
+theme_override_styles/separator = SubResource("StyleBoxEmpty_cbngd")
+
+[node name="PlayerID" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player ID"
+horizontal_alignment = 2

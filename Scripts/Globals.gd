@@ -3,6 +3,14 @@ extends Node
 signal player_stat_change()
 signal no_health()
 
+var player_name: String
+var multiplayer_id: int = 1
+
+var selected_level: PackedScene:
+	set(lvl):
+		selected_level = lvl
+		print("SET Selected Level = %s" % lvl)
+
 var health: int = 20:
 	set(value):
 		if value > max_health:
@@ -35,11 +43,12 @@ var wave_finished_spawning: bool = true
 
 var max_health: int = 20
 
-var enemy_types = {
-	"blue_slime":preload("res://Scenes/Enemies/blue_slime.tscn"),
-	"red_slime":preload("res://Scenes/Enemies/red_slime.tscn"),
-}
-
-var effects = {
-	"burning":preload("res://Scenes/Effects/effect_burning.tscn"),
-}
+# Moved to Game.gd
+#var enemy_types = {
+	#"blue_slime":preload("res://Scenes/Enemies/blue_slime.tscn"),
+	#"red_slime":preload("res://Scenes/Enemies/red_slime.tscn"),
+#}
+#
+#var effects = {
+	#"burning":preload("res://Scenes/Effects/effect_burning.tscn"),
+#}

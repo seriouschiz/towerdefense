@@ -1,5 +1,75 @@
-[gd_scene format=3 uid="uid://dnfju6ugn3ag7"]
+[gd_scene load_steps=4 format=3 uid="uid://dnfju6ugn3ag7"]
+
+[ext_resource type="Script" uid="uid://cgj1nawqrun4k" path="res://Scenes/UI/multiplayer_lobby.gd" id="1_ieb4y"]
+[ext_resource type="PackedScene" uid="uid://br6xktjdds1d" path="res://Scenes/UI/lobby_item.tscn" id="2_58y7p"]
+[ext_resource type="PackedScene" uid="uid://cg3mmvabihu81" path="res://Scenes/UI/MainMenu/level_select_pnl.tscn" id="3_8xcwv"]
 
 [node name="MultiplayerLobby" type="MarginContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ieb4y")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.0
+offset_top = -100.0
+offset_right = 143.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Players" type="VBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LobbyItem" parent="Panel/VBoxContainer/Players" instance=ExtResource("2_58y7p")]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBoxContainer/Players"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LoadingTxt" type="Label" parent="Panel/VBoxContainer/Players"]
+layout_mode = 2
+text = "Loading..."
+
+[node name="BtnContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="BackBtn" type="Button" parent="Panel/VBoxContainer/BtnContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="LevelSelectBtn" type="Button" parent="Panel/VBoxContainer/BtnContainer"]
+layout_mode = 2
+text = "SelectLevel"
+
+[node name="StartBtn" type="Button" parent="Panel/VBoxContainer/BtnContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="LevelSelectPnl" parent="Panel" instance=ExtResource("3_8xcwv")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+
+[node name="RefreshTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="pressed" from="Panel/VBoxContainer/BtnContainer/BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/BtnContainer/LevelSelectBtn" to="." method="_on_level_select_btn_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/BtnContainer/StartBtn" to="." method="_on_start_btn_pressed"]
+[connection signal="timeout" from="RefreshTimer" to="." method="_on_refresh_timer_timeout"]

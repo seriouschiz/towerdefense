@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6pxne7g51m1c"]
+
+[sub_resource type="GDScript" id="GDScript_8yrv1"]
+script/source = "extends Control
+
+@onready var txt = $Label.text
+
+func _ready() -> void:
+	var t = Timer.new()
+	t.timeout.connect(next_frame)
+	t.wait_time = 0.5
+	t.autostart = true
+	t.one_shot = false
+	add_child(t)
+
+func next_frame():
+	match txt:
+		\"Loading . . .\":
+			txt = \"Loading \"
+		\"Loading \":
+			txt = \"Loading . \"
+		\"Loading . \":
+			txt = \"Loading . . \"
+		\"Loading . . \":
+			txt = \"Loading . . .\"
+"
+
+[node name="LoadingText" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_8yrv1")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Loading . . ."
