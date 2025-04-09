@@ -24,7 +24,6 @@ func add_player_to_lobby(player_id, player_name):
 
 func _on_refresh_timer_timeout() -> void:
 	update_lobby_players()
-	$RefreshTimer.wait_time = 10
 	if not MultiplayerManager.is_host:
 		$Panel/VBoxContainer/BtnContainer/LevelSelectBtn.hide()
 	else:

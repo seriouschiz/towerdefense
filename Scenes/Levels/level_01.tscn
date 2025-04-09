@@ -13,7 +13,7 @@ point_count = 18
 [node name="Level01" instance=ExtResource("1_gggha")]
 script = ExtResource("2_pyd58")
 
-[node name="BackgroundSprite" parent="." index="2"]
+[node name="BackgroundSprite" parent="." index="3"]
 texture = ExtResource("2_yha0q")
 
 [node name="CollisionPolygon2D" parent="BuildableArea" index="0"]

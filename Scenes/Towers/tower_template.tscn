@@ -1,6 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://cueq4spghr5e7"]
+[gd_scene load_steps=8 format=3 uid="uid://cueq4spghr5e7"]
 
 [ext_resource type="Script" uid="uid://ugm6cum3fspq" path="res://Scenes/Towers/tower_template.gd" id="1_l52f7"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mlho6"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:target_pos")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8oxuj"]
 
@@ -175,6 +183,10 @@ collision_layer = 2
 collision_mask = 130
 script = ExtResource("1_l52f7")
 buildmode = false
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mlho6")
+public_visibility = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 

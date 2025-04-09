@@ -18,3 +18,9 @@ var towers = {
 		"ballista":preload("res://Scenes/Towers/ballista.tscn"),
 		"fire_tower":preload("res://Scenes/Towers/fire_tower.tscn"),
 		}
+
+var projectiles = {
+	"bullet":preload("res://Scenes/Projectiles/bullet.tscn"),
+	"arrow":preload("res://Scenes/Projectiles/arrow.tscn"),
+	"fire_ring":preload("res://Scenes/Projectiles/fire_ring.tscn"),
+}

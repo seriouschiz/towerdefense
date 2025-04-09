@@ -1,6 +1,5 @@
 extends Node
 
-
 func _on_main_menu_load_level() -> void:
 	print("ON LOAD LEVEL Selected Level = %s" % Globals.selected_level)
 	if Globals.selected_level:
@@ -21,7 +20,6 @@ func _on_main_menu_show_multiplayer_lobby() -> void:
 func _on_multiplayer_lobby_back() -> void:
 	$MultiplayerLobby.hide()
 	$MainMenu.show()
-
 
 func start_game():
 	print("Starting Game!")

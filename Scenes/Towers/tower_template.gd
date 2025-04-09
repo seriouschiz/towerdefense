@@ -11,8 +11,11 @@ signal shoot(projectile:Projectile, pos:Vector2, target: Node2D, attacker: Strin
 @export var damage: int ## Damage each attack does
 @export var attack_cd: float ## Time in seconds between attacks
 
+var owner_id = 1
+
 var target
 var new_target
+var target_pos
 var in_range = []
 var can_attack:bool = true
 
@@ -35,6 +38,10 @@ var overlapping = []
 func _ready() -> void:
 	$AttackRange/CollisionShape2D.shape.radius = attack_range
 	attack_cooldown.wait_time = attack_cd
+	if buildmode:
+		$MultiplayerSynchronizer.public_visibility = false
+	else:
+		$MultiplayerSynchronizer.public_visibility = true
 	
 
 func _draw() -> void:
@@ -51,23 +58,29 @@ func _process(_delta: float) -> void:
 			range_color = range_bad
 			state_changer.play("buildmode_bad")
 	else:
-		if target != null:
-			top.look_at(target.global_position)
+		if multiplayer.is_server() or MultiplayerManager.multiplayer_mode == false:
+			if target != null:
+				target_pos = target.global_position
+		if target_pos != null:
+			top.look_at(target_pos)
 
 func _on_attack_range_body_entered(body: Node2D) -> void:
-	#print(str(get_parent()," has entered"))
-	in_range.append(body.get_parent())
-	#print(body.get_parent().path_progress)
-	#print(str("Targets: ",in_range))
-	if attack_cooldown.is_stopped():
-		#attack_cooldown.start()
-		wake.start()
+	if multiplayer.is_server() or MultiplayerManager.multiplayer_mode == false:
+		#print(str(get_parent()," has entered"))
+		in_range.append(body.get_parent())
+		#print(body.get_parent().path_progress)
+		#print(str("Targets: ",in_range))
+		if attack_cooldown.is_stopped():
+			#attack_cooldown.start()
+			wake.start()
 
 func _on_attack_range_body_exited(body: Node2D) -> void:
-	#print(str(body.get_parent()," has exited"))
-	in_range.erase(body.get_parent())
-	if in_range.is_empty():
-		target = null
+	if multiplayer.is_server() or MultiplayerManager.multiplayer_mode == false:
+		#print(str(body.get_parent()," has exited"))
+		in_range.erase(body.get_parent())
+		if in_range.is_empty():
+			target = null
+			target_pos = null
 
 func get_target():
 	if not in_range.is_empty():
@@ -85,8 +98,9 @@ func _on_target_refresh_timeout() -> void:
 	if buildmode:
 		attackrangearea.monitoring = false
 	else:
-		attackrangearea.monitoring = true
-		get_target()
+		if multiplayer.is_server() or MultiplayerManager.multiplayer_mode == false:
+			attackrangearea.monitoring = true
+			get_target()
 
 func _on_attack_cooldown_timeout() -> void:
 	if not in_range.is_empty():
@@ -105,6 +119,6 @@ func _on_area_exited(area: Area2D) -> void:
 		canbuild = true
 
 func _on_wake_timeout() -> void:
-	shoot.emit(projectile_type, fire_point.global_position,target,self.name,damage)
-	attack_cooldown.one_shot = false
-	attack_cooldown.start()
+		shoot.emit(projectile_type, fire_point.global_position,target,self.name,damage)
+		attack_cooldown.one_shot = false
+		attack_cooldown.start()

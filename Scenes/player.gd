@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed: int = 400
 @onready var camera: Camera2D = $Camera2D
+@onready var name_label: Label = $PlayerName
 
 var player_name: String
 var player_id := 1:
@@ -11,6 +12,11 @@ var player_id := 1:
 
 func _ready() -> void:
 	multiplayer.connected_to_server.connect(_set_up_mp_authority)
+	name_label.text = player_name
+	if player_id == multiplayer.get_unique_id():
+		camera.enabled = true
+	else:
+		camera.enabled = false
 
 func _set_up_mp_authority():
 	print("Connected to server")

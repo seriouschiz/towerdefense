@@ -32,9 +32,9 @@ _spawnable_scenes = PackedStringArray("uid://bk2b7etxaq4sx")
 spawn_path = NodePath("../Level")
 spawn_limit = 1
 
-[node name="PlayersSpawnNode" type="Node2D" parent="." groups=["PlayerSpawnNode"]]
-
 [node name="Level" type="Node" parent="."]
+
+[node name="PlayersSpawnNode" type="Node2D" parent="." groups=["PlayerSpawnNode"]]
 
 [connection signal="load_level" from="MainMenu" to="." method="_on_main_menu_load_level"]
 [connection signal="show_multiplayer_lobby" from="MainMenu" to="." method="_on_main_menu_show_multiplayer_lobby"]

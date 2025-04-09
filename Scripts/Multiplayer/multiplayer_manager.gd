@@ -3,20 +3,24 @@ extends Node
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
+signal update_ui
 
 const SERVER_PORT = 8080
 const DEFAULT_SERVER_IP = "127.0.0.1"
 var player_scene = preload("res://Scenes/player.tscn")
+var player_spawn_node
 
-#var _players_spawn_node
-var lobby_size:int = 4
+var lobby_size:int = 2
 
 # This will contain player info for every player,
 # with the keys being each player's unique IDs.
 var players = {}
 
 # This is the local player info. This is set by the _set_name function in main_menu.gd
-var player_info = {"player_name": "Name"}
+var player_info = {"player_name": "Name" , "money": Globals.starting_money}:
+	set(value):
+		player_info = value
+		update_player_info.rpc(value)
 
 var players_loaded: int = 0
 var is_host: bool = false
@@ -28,6 +32,21 @@ func _ready() -> void:
 	multiplayer.connected_to_server.connect(_on_connected_ok)
 	multiplayer.connection_failed.connect(_on_connected_fail)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	
+	player_spawn_node = get_tree().get_first_node_in_group("PlayerSpawnNode")
+
+@rpc
+func update_player_info(new_info):
+	player_info = new_info
+
+func spawn_players():
+	for player in players:
+		var new_player = player_scene.instantiate()
+		new_player.name = str(player)
+		new_player.player_name = players[player].player_name
+		new_player.player_id = int(player)
+		player_spawn_node.add_child(new_player)
+	update_ui.emit()
 
 func become_host():
 	print("Starting host!")
@@ -96,8 +115,7 @@ func player_loaded():
 		print("Players loaded: %s" % players_loaded)
 		print(players)
 		if players_loaded == lobby_size:
-			GameManager.start_game()
-			players_loaded = 0
+			spawn_players()
 
 @rpc("any_peer","reliable")
 func _register_player(new_player_info):

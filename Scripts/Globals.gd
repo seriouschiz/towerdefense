@@ -4,7 +4,7 @@ signal player_stat_change()
 signal no_health()
 
 var player_name: String
-var multiplayer_id: int = 1
+var starting_money: int = 200
 
 var selected_level: PackedScene:
 	set(lvl):

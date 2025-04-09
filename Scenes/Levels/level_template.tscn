@@ -7,6 +7,17 @@
 [node name="Level_Template" type="Node2D"]
 script = ExtResource("1_pq1v6")
 
+[node name="Spawners" type="Node" parent="."]
+
+[node name="TowerSpawner" type="MultiplayerSpawner" parent="Spawners"]
+spawn_path = NodePath("../../Towers")
+
+[node name="EnemySpawner" type="MultiplayerSpawner" parent="Spawners"]
+spawn_path = NodePath("../../Enemies")
+
+[node name="ProjectileSpawner" type="MultiplayerSpawner" parent="Spawners"]
+spawn_path = NodePath("../../Projectiles")
+
 [node name="ui" parent="." instance=ExtResource("2_yqiyc")]
 
 [node name="Timers" type="Node" parent="."]
@@ -24,12 +35,14 @@ collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BuildableArea"]
 
-[node name="Towers" type="Node" parent="."]
-
 [node name="Projectiles" type="Node" parent="."]
 
 [node name="Enemies" type="Path2D" parent="."]
 script = ExtResource("3_jhlw4")
+
+[node name="Towers" type="Node" parent="."]
+
+[node name="CurrentlyBuilding" type="Node" parent="."]
 
 [connection signal="twr_btn_pressed" from="ui" to="." method="_on_ui_twr_btn_pressed"]
 [connection signal="timeout" from="Timers/BuildTimer" to="." method="_on_build_timer_timeout"]

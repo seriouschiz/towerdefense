@@ -12,12 +12,24 @@ signal start_wave()
 @onready var start_wave_button: Button = $StartWaveButton
 var tower_button: PackedScene = preload("res://Scenes/UI/Buttons/tower_button.tscn")
 
+var id:int = 0
+
 func _ready() -> void:
+	MultiplayerManager.update_ui.connect(update_all)
 	update_all()
 	update_buttons()
-	Globals.connect("player_stat_change",update_all)
+
+func setup_multiplayer():
+	if id == 0:
+		id = multiplayer.get_unique_id()
+		if id != 0:
+			print("Your ID is %s" % id)
+		else:
+			print("No ID is set: " + str(id))
 
 func update_buttons():
+	for child in build_buttons_container.get_children():
+		child.queue_free()
 	for tower in Game.towers:
 		var twr = Game.towers[tower].instantiate()
 		var button = tower_button.instantiate()
@@ -32,7 +44,9 @@ func tower_button_pressed(scene:PackedScene):
 	#print(str("Building ",type,". Cost: $",cost,"..."))
 	twr_btn_pressed.emit(scene)
 
+@rpc("any_peer","call_local","reliable")
 func update_all():
+	setup_multiplayer()
 	update_health()
 	update_money()
 	enemies_amount.text = str(Globals.enemies_alive)
@@ -43,7 +57,12 @@ func update_health():
 	health_amount.text = str(Globals.health)
 	
 func update_money():
-	money_amount.text = str(Globals.money)
+	#money_amount.text = str(Globals.money)
+	if MultiplayerManager.multiplayer_mode and id:
+		money_amount.text = str(MultiplayerManager.players[id].money)
+		#print(str("Player ", id,": $",MultiplayerManager.players[id].money))
+	else:
+		money_amount.text = "No money amount set"
 
 func _on_start_wave_button_pressed() -> void:
 	start_wave.emit()

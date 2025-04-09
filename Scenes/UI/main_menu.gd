@@ -11,7 +11,6 @@ func _load_level():
 
 #region MenuPnl
 func _on_singleplayer_btn_pressed() -> void:
-	%MenuPnl.hide()
 	%LevelSelectPnl.show()
 
 func _on_multiplayer_btn_pressed() -> void:
