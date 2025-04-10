@@ -30,6 +30,9 @@ func _ready() -> void:
 		add_child(player)
 
 func get_towers():
+	if not multiplayer.is_server():
+		return
+	
 	for tower in get_tree().get_nodes_in_group("Towers"):
 		if not tower_array.has(tower):
 			tower_array.append(tower)
@@ -38,7 +41,7 @@ func get_towers():
 func prepare_spawners():
 	get_tower_types()
 	get_enemy_types()
-	get_projectile_types()
+	#get_projectile_types()
 
 func get_tower_types():
 	for twr in Game.towers:
@@ -50,10 +53,10 @@ func get_enemy_types():
 		var enemy_path = Game.enemies[enemy].resource_path
 		$Spawners/EnemySpawner.add_spawnable_scene(enemy_path)
 
-func get_projectile_types():
-	for p in Game.projectiles:
-		var path = Game.projectiles[p].resource_path
-		$Spawners/ProjectileSpawner.add_spawnable_scene(path)
+#func get_projectile_types():
+	#for p in Game.projectiles:
+		#var path = Game.projectiles[p].resource_path
+		#$Spawners/ProjectileSpawner.add_spawnable_scene(path)
 
 func _on_ui_twr_btn_pressed(scene:PackedScene) -> void:
 	# Create a Tower when the Button is pressed
@@ -111,12 +114,24 @@ func tower_result(success:bool, cost:int):
 		print("Can't afford!")
 
 func create_projectile(projectile_type,pos,target,attacker,dmg):
+	if not multiplayer.is_server():
+		return
 	var projectile = projectile_type.instantiate() as Projectile
+	print(str(multiplayer.get_unique_id()," : ",target))
+	if target:
+		mp_projectile.rpc(pos,projectile.proj_name,target.name)
 	projectile.position = pos
 	projectile.target = target
 	projectile.attacker = attacker
 	projectile.damage = dmg
 	projectiles.add_child(projectile,true)
+
+@rpc("call_remote","reliable")
+func mp_projectile(pos, projectile_name:String, target_name:String):
+	var mp_proj = Game.projectiles[projectile_name].instantiate() as Projectile
+	mp_proj.position = pos
+	mp_proj.target = $Enemies.get_node(target_name)
+	projectiles.add_child(mp_proj,true)
 
 func start_wave():
 	Globals.wave_in_progress = true

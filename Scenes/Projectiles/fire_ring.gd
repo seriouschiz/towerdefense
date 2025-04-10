@@ -3,6 +3,8 @@ extends Projectile
 @export var duration: float
 @onready var lifetime: Timer = $Lifetime
 
+var proj_name = "fire_ring"
+
 var targets = []
 
 func _ready() -> void:

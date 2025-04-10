@@ -38,11 +38,11 @@ var overlapping = []
 func _ready() -> void:
 	$AttackRange/CollisionShape2D.shape.radius = attack_range
 	attack_cooldown.wait_time = attack_cd
-	if buildmode:
-		$MultiplayerSynchronizer.public_visibility = false
-	else:
-		$MultiplayerSynchronizer.public_visibility = true
-	
+	if MultiplayerManager.multiplayer_mode:
+		if buildmode:
+			$MultiplayerSynchronizer.public_visibility = false
+		else:
+			$MultiplayerSynchronizer.public_visibility = true
 
 func _draw() -> void:
 	draw_circle(Vector2.ZERO,attack_range,range_color)
@@ -83,6 +83,8 @@ func _on_attack_range_body_exited(body: Node2D) -> void:
 			target_pos = null
 
 func get_target():
+	if multiplayer.is_server() == false and MultiplayerManager.multiplayer_mode:
+		return
 	if not in_range.is_empty():
 		for enemy in in_range:
 			if "path_progress" in enemy:
@@ -95,6 +97,8 @@ func get_target():
 		target = new_target
 
 func _on_target_refresh_timeout() -> void:
+	if multiplayer.is_server() == false and MultiplayerManager.multiplayer_mode:
+		return
 	if buildmode:
 		attackrangearea.monitoring = false
 	else:
@@ -103,10 +107,19 @@ func _on_target_refresh_timeout() -> void:
 			get_target()
 
 func _on_attack_cooldown_timeout() -> void:
+	if multiplayer.is_server() == false and MultiplayerManager.multiplayer_mode:
+		return
 	if not in_range.is_empty():
 		shoot.emit(projectile_type, fire_point.global_position,target,self.name,damage)
 	else:
 		attack_cooldown.stop()
+
+func _on_wake_timeout() -> void:
+	if multiplayer.is_server() == false and MultiplayerManager.multiplayer_mode:
+		return
+	shoot.emit(projectile_type, fire_point.global_position,target,self.name,damage)
+	attack_cooldown.one_shot = false
+	attack_cooldown.start()
 
 # If tower is overlapping with anything, cannot build
 func _on_area_entered(area: Area2D) -> void:
@@ -117,8 +130,3 @@ func _on_area_exited(area: Area2D) -> void:
 	overlapping.erase(area)
 	if overlapping.is_empty():
 		canbuild = true
-
-func _on_wake_timeout() -> void:
-		shoot.emit(projectile_type, fire_point.global_position,target,self.name,damage)
-		attack_cooldown.one_shot = false
-		attack_cooldown.start()

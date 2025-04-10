@@ -4,9 +4,13 @@ extends PathFollow2D
 signal effect_added(target:Node,effect:PackedScene)
 signal finished
 
+var health: float:
+	set(value):
+		health = value
+		update_healthbar()
+
 @export var speed: int
 @export var maxhealth: float
-var health: float
 @export var value: int
 @export var damage: int = 1
 @export var path_progress: float
@@ -28,11 +32,16 @@ func _process(delta: float) -> void:
 		queue_free()
 
 func hit(dmg:int,_source:String,_attacker:String):
+	if not multiplayer.is_server():
+		return
 	health -= dmg
-	healthbar.value = health
 	# print(str(self," was hit by ",source," from ",attacker," for ",damage," damage! Health: ",health))
 	if health <= 0:
 		die()
+
+func update_healthbar():
+	if healthbar:
+		healthbar.value = health
 
 func add_effect(effect:PackedScene):
 	effect_added.emit(self,effect)

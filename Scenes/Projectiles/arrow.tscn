@@ -1,15 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwhhngyryohav"]
+[gd_scene load_steps=5 format=3 uid="uid://dwhhngyryohav"]
 
 [ext_resource type="PackedScene" uid="uid://ukr0ndovx342" path="res://Scenes/Projectiles/projectile_template.tscn" id="1_1blu7"]
 [ext_resource type="Texture2D" uid="uid://83dhvpdbkb2l" path="res://Resources/Images/Projectiles/Ballista_arrow.png" id="2_14x3m"]
+[ext_resource type="Script" uid="uid://b58nan640a6um" path="res://Scenes/Projectiles/arrow.gd" id="2_fpagu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oerg4"]
 radius = 4.0
 height = 82.0
 
 [node name="Arrow" instance=ExtResource("1_1blu7")]
-speed = 1000
-dmg_name = "Arrow"
+script = ExtResource("2_fpagu")
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(-36.03, 0)
