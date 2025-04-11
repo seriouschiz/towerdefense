@@ -18,6 +18,9 @@ func _ready() -> void:
 	MultiplayerManager.update_ui.connect(update_all)
 	update_all()
 	update_buttons()
+	
+	if MultiplayerManager.multiplayer_mode or multiplayer.is_server() == false:
+		start_wave_button.hide()
 
 func setup_multiplayer():
 	if id == 0:
@@ -44,7 +47,6 @@ func tower_button_pressed(scene:PackedScene):
 	#print(str("Building ",type,". Cost: $",cost,"..."))
 	twr_btn_pressed.emit(scene)
 
-@rpc("any_peer","call_local","reliable")
 func update_all():
 	setup_multiplayer()
 	update_health()
@@ -69,4 +71,9 @@ func _on_start_wave_button_pressed() -> void:
 	start_wave_button.hide()
 
 func show_start_button():
-	start_wave_button.show()
+	if multiplayer.is_server() or MultiplayerManager.multiplayer_mode == false:
+		start_wave_button.show()
+
+
+func _on_timer_timeout() -> void:
+	update_all() # TODO: Don't rely on this timer to update the UI

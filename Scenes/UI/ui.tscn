@@ -75,4 +75,9 @@ offset_bottom = 46.0
 grow_horizontal = 2
 text = "Start Next Wave"
 
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+ignore_time_scale = true
+
 [connection signal="pressed" from="StartWaveButton" to="." method="_on_start_wave_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

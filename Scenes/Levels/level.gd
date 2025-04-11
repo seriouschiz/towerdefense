@@ -57,6 +57,9 @@ func get_enemy_types():
 	#for p in Game.projectiles:
 		#var path = Game.projectiles[p].resource_path
 		#$Spawners/ProjectileSpawner.add_spawnable_scene(path)
+	#for e in Game.effects:
+		#var path = Game.effects[e].resource_path
+		#$Spawners/ProjectileSpawner.add_spawnable_scene(path)
 
 func _on_ui_twr_btn_pressed(scene:PackedScene) -> void:
 	# Create a Tower when the Button is pressed
@@ -114,23 +117,25 @@ func tower_result(success:bool, cost:int):
 		print("Can't afford!")
 
 func create_projectile(projectile_type,pos,target,attacker,dmg):
-	if not multiplayer.is_server():
-		return
-	var projectile = projectile_type.instantiate() as Projectile
-	print(str(multiplayer.get_unique_id()," : ",target))
-	if target:
-		mp_projectile.rpc(pos,projectile.proj_name,target.name)
-	projectile.position = pos
-	projectile.target = target
-	projectile.attacker = attacker
-	projectile.damage = dmg
-	projectiles.add_child(projectile,true)
+	if multiplayer.is_server() or MultiplayerManager.multiplayer_mode == false:
+		var projectile = projectile_type.instantiate() as Projectile
+		if MultiplayerManager.multiplayer_mode:
+			if target:
+				mp_projectile.rpc(pos,projectile.proj_name,target.name)
+			else:
+				mp_projectile.rpc(pos,projectile.proj_name,"")
+		projectile.position = pos
+		projectile.target = target
+		projectile.attacker = attacker
+		projectile.damage = dmg
+		projectiles.add_child(projectile,true)
 
 @rpc("call_remote","reliable")
 func mp_projectile(pos, projectile_name:String, target_name:String):
 	var mp_proj = Game.projectiles[projectile_name].instantiate() as Projectile
 	mp_proj.position = pos
-	mp_proj.target = $Enemies.get_node(target_name)
+	if target_name != "":
+		mp_proj.target = $Enemies.get_node(target_name)
 	projectiles.add_child(mp_proj,true)
 
 func start_wave():
@@ -150,9 +155,27 @@ func create_enemy(enemy_scene:PackedScene):
 func enemy_finished(dmg:int):
 	Globals.health -= dmg
 
-func enemy_add_effect(target:Node,effect:PackedScene):
-	var new_effect = effect.instantiate()
-	target.add_child.call_deferred(new_effect)
+func enemy_add_effect(target:Node,attacker,effect:PackedScene):
+	if multiplayer.is_server() or MultiplayerManager.multiplayer_mode == false:
+		var new_effect = effect.instantiate()
+		var pos = target.position
+		new_effect.attacker = attacker
+		if MultiplayerManager.multiplayer_mode:
+			if target:
+				mp_add_effect.rpc(pos,new_effect.dmg_name,target.name)
+			else:
+				mp_add_effect.rpc(pos,effect.dmg_name,"")
+		target.add_child.call_deferred(new_effect)
+
+@rpc("call_remote","reliable")
+func mp_add_effect(pos, effect_name:String, target_name:String):
+	var mp_effect = Game.effects[effect_name].instantiate() as Effect
+	var target
+	if target_name != "":
+		target = $Enemies.get_node(target_name)
+	#mp_effect.global_position = pos	
+	mp_effect.target = target
+	target.add_child(mp_effect,true)
 
 func _on_build_timer_timeout() -> void:
 	buildmode = true

@@ -23,6 +23,9 @@ var waves = [ # ARGUMENTS: PackedScene for enemy type, amount of enemies to spaw
 		make_wave(Game.enemies.blue_slime,10,0.6),
 		make_wave(Game.enemies.red_slime,2,0.8),
 	],
+	[ # WAVE 4
+		make_wave(Game.enemies.red_slime,50,0.2)
+	]
 ]
 
 func make_wave(enemy:PackedScene,howmany:int,time_between_spawns:float) -> Wave:

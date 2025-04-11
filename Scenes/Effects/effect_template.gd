@@ -5,7 +5,7 @@ extends Node
 var target
 var duration: float
 var tickrate: float
-var attacker: String
+var attacker
 @export var dmg_name: String
 
 func _ready() -> void:

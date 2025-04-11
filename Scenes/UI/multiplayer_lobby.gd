@@ -26,8 +26,10 @@ func _on_refresh_timer_timeout() -> void:
 	update_lobby_players()
 	if not MultiplayerManager.is_host:
 		$Panel/VBoxContainer/BtnContainer/LevelSelectBtn.hide()
+		$Panel/VBoxContainer/BtnContainer/StartBtn.hide()
 	else:
 		$Panel/VBoxContainer/BtnContainer/LevelSelectBtn.show()
+		$Panel/VBoxContainer/BtnContainer/StartBtn.show()
 
 func _on_level_select_btn_pressed() -> void:
 	$Panel/LevelSelectPnl.show()

@@ -1,7 +1,7 @@
 class_name Tower
 extends Area2D
 
-signal shoot(projectile:Projectile, pos:Vector2, target: Node2D, attacker: String, dmg: int)
+signal shoot(projectile:Projectile, pos:Vector2, target: Node2D, attacker, dmg: int)
 
 @export var type: String
 @export var cost: int
@@ -110,14 +110,14 @@ func _on_attack_cooldown_timeout() -> void:
 	if multiplayer.is_server() == false and MultiplayerManager.multiplayer_mode:
 		return
 	if not in_range.is_empty():
-		shoot.emit(projectile_type, fire_point.global_position,target,self.name,damage)
+		shoot.emit(projectile_type, fire_point.global_position,target,owner_id,damage)
 	else:
 		attack_cooldown.stop()
 
 func _on_wake_timeout() -> void:
 	if multiplayer.is_server() == false and MultiplayerManager.multiplayer_mode:
 		return
-	shoot.emit(projectile_type, fire_point.global_position,target,self.name,damage)
+	shoot.emit(projectile_type, fire_point.global_position,target,owner_id,damage)
 	attack_cooldown.one_shot = false
 	attack_cooldown.start()
 

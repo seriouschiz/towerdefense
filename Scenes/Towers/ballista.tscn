@@ -20,11 +20,11 @@ attack_range = 500
 damage = 15
 attack_cd = 2.5
 
-[node name="CollisionShape2D" parent="." index="0"]
+[node name="CollisionShape2D" parent="." index="1"]
 shape = SubResource("CircleShape2D_nyb4x")
 
-[node name="Base" parent="." index="2"]
+[node name="Base" parent="." index="3"]
 texture = ExtResource("4_dqed5")
 
-[node name="Top" parent="." index="3"]
+[node name="Top" parent="." index="4"]
 texture = ExtResource("5_dh5ph")

@@ -4,7 +4,7 @@ extends Area2D
 var target
 @export var speed: int
 var damage: int
-var attacker: String
+var attacker # ID of the owner of the tower that fired the projectile
 @export var dmg_name: String
 var direction: Vector2
 

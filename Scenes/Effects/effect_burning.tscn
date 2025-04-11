@@ -17,7 +17,7 @@ turbulence_noise_scale = 5.0
 
 [node name="Burning" instance=ExtResource("1_vmxwi")]
 script = ExtResource("2_suvf0")
-dmg_name = "Burning"
+dmg_name = "burning"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." index="2"]
 texture = ExtResource("3_lkg7o")

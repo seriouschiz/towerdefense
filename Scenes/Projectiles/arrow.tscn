@@ -10,6 +10,8 @@ height = 82.0
 
 [node name="Arrow" instance=ExtResource("1_1blu7")]
 script = ExtResource("2_fpagu")
+speed = 1000
+dmg_name = "ballista"
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(-36.03, 0)

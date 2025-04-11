@@ -20,11 +20,14 @@ var players = {}
 var player_info = {"player_name": "Name" , "money": Globals.starting_money}:
 	set(value):
 		player_info = value
-		update_player_info.rpc(value)
+		update_ui.emit()
+		#update_player_info.rpc(value)
 
 var players_loaded: int = 0
 var is_host: bool = false
 var multiplayer_mode = false
+
+var player_sync
 
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_player_connected)
@@ -34,10 +37,16 @@ func _ready() -> void:
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	
 	player_spawn_node = get_tree().get_first_node_in_group("PlayerSpawnNode")
+	
+	player_sync = MultiplayerSynchronizer.new()
+	add_child(player_sync,true)
+	player_sync.replication_config = SceneReplicationConfig.new()
+	player_sync.replication_config.add_property(":players")
 
-@rpc
-func update_player_info(new_info):
-	player_info = new_info
+#@rpc("authority","call_remote","reliable")
+#func update_player_info(new_info):
+	#player_info = new_info
+	#print(player_info)
 
 func spawn_players():
 	for player in players:

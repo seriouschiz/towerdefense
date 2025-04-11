@@ -4,7 +4,7 @@ signal player_stat_change()
 signal no_health()
 
 var player_name: String
-var starting_money: int = 200
+var starting_money: int = 300
 
 var selected_level: PackedScene:
 	set(lvl):

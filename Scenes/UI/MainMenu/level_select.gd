@@ -14,7 +14,8 @@ func _ready() -> void:
 				Globals.selected_level = Game.levels[level]
 			$LevelGrid.add_child(lvl_btn)
 			lvl_btn.lvl_btn.connect(_select_level)
-
+	
+	
 func _select_level(lvl:PackedScene):
 	print("Selecting level %s" % lvl)
 	Globals.selected_level = lvl
@@ -24,4 +25,7 @@ func _on_back_btn_pressed() -> void:
 	hide()
 
 func _on_load_btn_pressed() -> void:
-	load_level.emit()
+	if not MultiplayerManager.multiplayer_mode:
+		load_level.emit()
+	else:
+		hide()
